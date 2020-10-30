@@ -1,10 +1,18 @@
+
 let mainContainer = document.getElementById(`js-container`);
 let priceSelect = document.getElementById(`priceSelect`);
 let categorySelect = document.getElementById(`categorySelect`);
 let productList = document.getElementsByClassName(`product-box__item`);
 let btnCheck = document.getElementById(`js-btn-check`);
 let priceList = document.getElementsByTagName(`p`);
-let PruductBuyBtn = document.getElementsByClassName(`product-box__btn`);
+let productBuyBtn = document.getElementsByClassName(`product-box__btn`);
+let TopCardProdCount = document.getElementById(`prod-count`);
+let TopCardProdPrice = document.getElementById(`prod-total-price`);
+
+TopCardProdCount.innerText = `0`;
+TopCardProdPrice.innerText = `0`;
+TopCardProdCountValue = 0;
+TopCardProdPriceValue = 0;
 
 
 /*------------------------------------Filter--------------------------------*/
@@ -87,6 +95,8 @@ let productFilter = function () {
 };
 priceSelect.onclick = productFilter;
 categorySelect.onclick = productFilter;
+
+
 /*--------------------------------------------------------------------------------*/
 /*------------------------------------Form Submit --------------------------------*/
 let orderFormRender = function () {
@@ -121,7 +131,6 @@ let orderFormRender = function () {
     userNameInput.onfocus = function () {
         userNameInput.setAttribute(`placeholder`, ``);
     }
-
 }
 
 let orderFormValidation = function (e) {
@@ -133,9 +142,6 @@ let orderFormValidation = function (e) {
     if (tmp1 == true && tmp2 == true) {
         alert("Спасибо за покупку!!! Ваш заказ принят.");
         orderFormContainer.remove();
-    }
-    else {
-
     }
 }
 
@@ -171,49 +177,32 @@ btnCheck.onclick = orderFormRender;
 
 /*--------------------------------------------------------------------------------*/
 /*------------------------------------ Shopping  basket --------------------------------*/
-
-
-
-/*
- var myFunction = function() {
- var attribute = this.getAttribute("data-myattribute");
- alert(attribute);
- };
-
- for (var i = 0; i < classname.length; i++) {
- classname[i].addEventListener('click', myFunction, false);
- }*/
-
-
 let ProductPriceCount = function () {
     let elemParent = this.closest(`.product-box__item`);
     let elem;
     let productsCount;
     let prodPrice;
-    let sumPrice;
-    let productsCountElement = null;
-
     elem = elemParent.lastElementChild.children[0];
     prodPrice = Number(elem.getAttribute('data-price'));
     console.log(prodPrice);
 
     productsCount = 1;
-    productsCountElement =  elemParent.lastElementChild.children[1].children[0];
-    productsCountElement.setAttribute(`value`, `1`);
-
-
-
-
-
-    /*for (let i = 0; i < elemParent.childNodes.length; i++) {
-        if (elemParent.childNodes[i].className == "qty__item") {
-            productsCountElement = elemParent.childNodes[i];
-            console.log(productsCountElement);
-            break;
-        }
+    productsCountElement = elemParent.lastElementChild.children[1].children[0];
+    productsCountElement.value ++;
+    productsCount = productsCountElement.value;
+    /*if (productsCountElement.value == 0) {
+        productsCountElement.getAttribute(`value`, `1`);
+    }
+    else {
+        productsCount = productsCountElement.value;
     }*/
+
+    TopCardProdCountValue ++;
+    TopCardProdCount.innerText = TopCardProdCountValue;
+    TopCardProdPriceValue = Number(TopCardProdPriceValue) + prodPrice * (Number(productsCount));
+    TopCardProdPrice.innerText = TopCardProdPriceValue;
 }
 
-    for (let i = 0; i < PruductBuyBtn.length; i++) {
-        PruductBuyBtn[i].addEventListener('click', ProductPriceCount);
-    }
+for (let i = 0; i < productBuyBtn.length; i++) {
+    productBuyBtn[i].addEventListener('click', ProductPriceCount);
+}
