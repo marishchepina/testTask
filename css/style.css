@@ -17,7 +17,7 @@ body {
 
 button, button:hover {
     cursor: pointer;
-    outline: none
+    outline: none;
 }
 
 h1, h2, h3 {
@@ -131,7 +131,7 @@ h1 {
 }
 
 .product-box__btn:hover {
-    box-shadow: 0 0 6px rgba(33, 60, 204, 0.6);
+   background-color: #EB4D4D;
 }
 
 /*  =========== top-cart
@@ -282,14 +282,17 @@ input:focus {
     border: 1px solid #ccc;
 }
 
-.order-form__btn {
+.order-form .order-form__btn {
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    font-size: 18px;
+    font-size: 22px;
     border: none;
     border-radius: 5px;
-    padding: 4px 10px;
+    padding: 6px 10px;
     background: #EC7263;
     color: #fff;
+    width: 140px;
 }
+
+
