@@ -16,6 +16,7 @@ module.exports = {
 		"no-empty-function": "error",
 		"no-eval": "error",
 		"no-extra-bind": "error",
+		"no-floating-decimal": "error",
 		"no-lone-blocks": "error",
 		"no-multi-spaces": "error",
 		"no-new": "warn",

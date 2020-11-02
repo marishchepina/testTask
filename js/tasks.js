@@ -154,24 +154,24 @@ let findProdPrice = function (node) {
     }
     for (let i = 0; i < node.children.length; i++) {
         let tmp = findProdPrice(node.children[i]);
-        if (tmp !== undefined) {
+        if (tmp) {
             return tmp;
         }
     }
 };
 
-let findprodQuantity = function (node) {
-    if (node.classList.contains('qty__item')) {
+let findProdQuantity = function (node) {
+    if (node.hasAttribute('data-quantity')) {
         return node.value;
-
     }
     for (let i = 0; i < node.children.length; i++) {
-        let tmp = findprodQuantity(node.children[i]);
-        if (tmp !== undefined) {
+        let tmp = findProdQuantity(node.children[i]);
+        if (tmp) {
             return tmp;
         }
     }
 };
+
 
 let cartCount = function (quantity, price) {
     cartQuantity = Number(cartQuantityNode.innerText) + Number(quantity);
@@ -186,7 +186,7 @@ document.addEventListener('click', (e) => {
     if (e.target.classList.contains('product-box__btn')) {
         let productNode = e.target.closest('.product-box__item');
         prodPrice = findProdPrice(productNode);
-        prodQuantity = findprodQuantity(productNode);
+        prodQuantity = findProdQuantity(productNode);
         cartCount(prodQuantity, prodPrice);
     }
 });
